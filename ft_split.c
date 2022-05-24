@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:43:50 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/05/24 15:57:41 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:29:47 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	ft_is_separator(char c, char sep)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (c == sep || c == '\0')
@@ -39,9 +39,9 @@ static	int	ft_get_words(char const *s, char c)
 	return (words);
 }
 
-static void write_word(char *list, char *s, char c)
+static void	write_word(char *list, char *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_is_separator(s[i], c) == 0)
@@ -69,7 +69,7 @@ static void	*write_split(char **list, char *s, char c)
 			j = 0;
 			while (ft_is_separator(s[i + j], c) == 0)
 				j++;
-			list[word] = (char*)malloc(sizeof(char) * (j + 1));
+			list[word] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!list[word])
 			{
 				while (word > 0)
@@ -81,18 +81,18 @@ static void	*write_split(char **list, char *s, char c)
 			word++;
 		}
 	}
-	return((void*)1);
+	return ((void *)1);
 }
 
-char    **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char    **list;
-	int     words;
-	
+	char	**list;
+	int		words;
+
 	if (s == NULL)
 		return (NULL);
 	words = ft_get_words(s, c);
-	list = (char **)malloc((words + 1)  * sizeof(char *));
+	list = (char **)malloc((words + 1) * sizeof(char *));
 	if (!list)
 		return (NULL);
 	list[words] = NULL;

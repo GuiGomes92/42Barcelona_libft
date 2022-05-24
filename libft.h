@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:22:41 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/05/24 13:28:28 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:30:56 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_list
 {
-	void	*content;
-	struct	s_list	*next;
+	void			*content;
+	struct s_list	*next;
 }	t_list;
 
 int		ft_isalpha(int c);
