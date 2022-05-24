@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:19:59 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/05/23 19:53:41 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:13:45 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	new = ft_lstnew(f(lst->content));
 	if (!new)
 		return (0);
-	lst = lst->next;	
+	//lst = lst->next;	
 	new->next = NULL;
 	return (new);
 }
