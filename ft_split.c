@@ -6,12 +6,22 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:43:50 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/05/24 16:29:47 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:27:30 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
+
+static int	ft_free(char **split, int word)
+{
+	while (word > 0)
+	{
+		word--;
+		free(split[word]);
+	}
+	free(split);
+	return (-1);
+}
 
 static int	ft_is_separator(char c, char sep)
 {
@@ -21,22 +31,6 @@ static int	ft_is_separator(char c, char sep)
 	if (c == sep || c == '\0')
 		return (1);
 	return (0);
-}
-
-static	int	ft_get_words(char const *s, char c)
-{
-	int	i;
-	int	words;
-
-	i = 0;
-	words = 0;
-	while (s[i] != '\0')
-	{
-		if (ft_is_separator(s[i + 1], c) == 1 && ft_is_separator(s[i], c) == 0)
-			words++;
-		i++;
-	}
-	return (words);
 }
 
 static void	write_word(char *list, char *s, char c)
@@ -52,7 +46,7 @@ static void	write_word(char *list, char *s, char c)
 	list[i] = '\0';
 }
 
-static void	*write_split(char **list, char *s, char c)
+static int	write_split(char **list, char *s, char c)
 {
 	int	i;
 	int	j;
@@ -71,31 +65,39 @@ static void	*write_split(char **list, char *s, char c)
 				j++;
 			list[word] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!list[word])
-			{
-				while (word > 0)
-					free(list[--word]);
-				return (NULL);
-			}
+				return (ft_free(list, word));
 			write_word(list[word], s + i, c);
 			i += j;
 			word++;
 		}
 	}
-	return ((void *)1);
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**list;
 	int		words;
+	int		word;
+	int		i;
 
+	word = 0;
+	i = 0;
+	words = 0;
 	if (s == NULL)
 		return (NULL);
-	words = ft_get_words(s, c);
+	while (s[i] != '\0')
+	{
+		if (ft_is_separator(s[i + 1], c) == 1 && ft_is_separator(s[i], c) == 0)
+			words++;
+		i++;
+	}
 	list = (char **)malloc((words + 1) * sizeof(char *));
 	if (!list)
 		return (NULL);
 	list[words] = NULL;
-	write_split(list, (char *)s, c);
+	word = write_split(list, (char *)s, c);
+	if (word == -1)
+		return (0);
 	return (list);
 }
