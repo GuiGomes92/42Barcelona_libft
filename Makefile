@@ -41,6 +41,7 @@ bonus:${NAME} ${OBJS_BONUS}
 #Regla para borrar todos los objetos y directorios
 clean:
 		${RM} ${OBJS}
+		${RM} ${OBJS_BONUS}
 #Regla para borrar todo lo que ha sido creado or el makefile
 fclean: clean
 		${RM} ${NAME}
